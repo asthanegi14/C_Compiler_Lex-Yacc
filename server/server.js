@@ -4,9 +4,10 @@ const { exec } = require('child_process');
 const cors = require('cors');
 const fs = require('fs');
 const path = require('path');
+require("dotenv").config();
 
 const app = express();
-const port = 5000;
+const port = process.env.PORT;
 
 app.use(bodyParser.json());
 app.use(cors());
