@@ -155,109 +155,33 @@ main:                                   # @main
 # %bb.0:
 	pushq	%rbp
 	.seh_pushreg %rbp
-	pushq	%rsi
-	.seh_pushreg %rsi
-	subq	$40, %rsp
-	.seh_stackalloc 40
-	leaq	32(%rsp), %rbp
-	.seh_setframe %rbp, 32
+	subq	$80, %rsp
+	.seh_stackalloc 80
+	leaq	80(%rsp), %rbp
+	.seh_setframe %rbp, 80
 	.seh_endprologue
-	subq	$32, %rsp
 	callq	__main
-	addq	$32, %rsp
-	movl	$0, -4(%rbp)
-	subq	$32, %rsp
+	movl	$0, -36(%rbp)
+	movq	.L__const.main.arr(%rip), %rax
+	movq	%rax, -32(%rbp)
+	movq	.L__const.main.arr+8(%rip), %rax
+	movq	%rax, -24(%rbp)
+	movq	.L__const.main.arr+16(%rip), %rax
+	movq	%rax, -16(%rbp)
+	leaq	-32(%rbp), %rcx
+	movl	$6, %edx
+	callq	printarray
 	leaq	.L.str.1(%rip), %rcx
 	callq	printf
-	leaq	.L.str.2(%rip), %rcx
-	leaq	4(%rbp), %rdx
-	callq	scanf
-	addq	$32, %rsp
-	movl	4(%rbp), %ecx
-	movq	%rsp, -16(%rbp)
-	leaq	15(,%rcx,4), %rax
-	andq	$-16, %rax
-	callq	___chkstk_ms
-	subq	%rax, %rsp
-	movq	%rsp, %rsi
-	movq	%rcx, -24(%rbp)
-	subq	$32, %rsp
-	leaq	.L.str.3(%rip), %rcx
-	callq	printf
-	addq	$32, %rsp
-	movl	$0, (%rbp)
-.LBB3_1:                                # =>This Inner Loop Header: Depth=1
-	movl	(%rbp), %eax
-	cmpl	4(%rbp), %eax
-	jge	.LBB3_4
-# %bb.2:                                #   in Loop: Header=BB3_1 Depth=1
-	movslq	(%rbp), %rax
-	shlq	$2, %rax
-	movq	%rsi, %rdx
-	addq	%rax, %rdx
-	subq	$32, %rsp
-	leaq	.L.str.2(%rip), %rcx
-	callq	scanf
-	addq	$32, %rsp
-# %bb.3:                                #   in Loop: Header=BB3_1 Depth=1
-	movl	(%rbp), %eax
-	addl	$1, %eax
-	movl	%eax, (%rbp)
-	jmp	.LBB3_1
-.LBB3_4:
-	movl	4(%rbp), %edx
-	subq	$32, %rsp
-	movq	%rsi, %rcx
-	callq	printarray
-	leaq	.L.str.4(%rip), %rcx
-	callq	printf
-	addq	$32, %rsp
-	movl	4(%rbp), %edx
-	subq	$32, %rsp
-	movq	%rsi, %rcx
+	leaq	-32(%rbp), %rcx
+	movl	$6, %edx
 	callq	insertion
-	addq	$32, %rsp
-	movl	4(%rbp), %edx
-	subq	$32, %rsp
-	movq	%rsi, %rcx
+	leaq	-32(%rbp), %rcx
+	movl	$6, %edx
 	callq	printarray
-	addq	$32, %rsp
-	movl	$0, -4(%rbp)
-	movq	-16(%rbp), %rsp
-	movl	-4(%rbp), %eax
-	leaq	8(%rbp), %rsp
-	popq	%rsi
+	xorl	%eax, %eax
+	addq	$80, %rsp
 	popq	%rbp
-	retq
-	.seh_endproc
-                                        # -- End function
-	.def	scanf;
-	.scl	3;
-	.type	32;
-	.endef
-	.p2align	4, 0x90                         # -- Begin function scanf
-scanf:                                  # @scanf
-.seh_proc scanf
-# %bb.0:
-	subq	$56, %rsp
-	.seh_stackalloc 56
-	.seh_endprologue
-	movq	%r9, 88(%rsp)
-	movq	%r8, 80(%rsp)
-	movq	%rdx, 72(%rsp)
-	movq	%rcx, 48(%rsp)
-	leaq	72(%rsp), %rax
-	movq	%rax, 40(%rsp)
-	movq	__imp___acrt_iob_func(%rip), %rax
-	xorl	%ecx, %ecx
-	callq	*%rax
-	movq	48(%rsp), %rdx
-	movq	40(%rsp), %r8
-	movq	%rax, %rcx
-	callq	__mingw_vfscanf
-	movl	%eax, 36(%rsp)
-	movl	36(%rsp), %eax
-	addq	$56, %rsp
 	retq
 	.seh_endproc
                                         # -- End function
@@ -265,15 +189,15 @@ scanf:                                  # @scanf
 .L.str:                                 # @.str
 	.asciz	"%d "
 
+	.p2align	4, 0x0                          # @__const.main.arr
+.L__const.main.arr:
+	.long	3                               # 0x3
+	.long	6                               # 0x6
+	.long	4                               # 0x4
+	.long	8                               # 0x8
+	.long	1                               # 0x1
+	.long	9                               # 0x9
+
 .L.str.1:                               # @.str.1
-	.asciz	"Enter the number of elements in the array: \n"
-
-.L.str.2:                               # @.str.2
-	.asciz	"%d"
-
-.L.str.3:                               # @.str.3
-	.asciz	"Enter the elements of the array: \n"
-
-.L.str.4:                               # @.str.4
 	.asciz	"\nSorted array: "
 

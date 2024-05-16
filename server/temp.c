@@ -19,24 +19,13 @@ void printarray(int arr[],int n)
     {
         printf("%d ",arr[i]);
     }
-} 
+}
 int main()
 {
-    // int arr[]={3,6,4,8,1,9};
-    int n;
-
-    printf("Enter the number of elements in the array: \n");
-    scanf("%d", &n);
-    int arr[n];
-
-    printf("Enter the elements of the array: \n");
-    for (int i = 0; i < n; i++) {
-        scanf("%d", &arr[i]);
-    }
-
-    printarray(arr,n);
+    int arr[]={3,6,4,8,1,9};
+    printarray(arr,6);
     printf("\nSorted array: ");
-    insertion(arr,n);
-    printarray(arr,n);   
+    insertion(arr,6);
+    printarray(arr,6);   
     return 0;
 }
