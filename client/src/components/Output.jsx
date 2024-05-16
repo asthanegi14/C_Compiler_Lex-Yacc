@@ -14,8 +14,8 @@ const Output = ({ editorRef, language }) => {
         if (!sourceCode) return;
         try {
             setIsLoading(true);
-            console.log("port = " + import.meta.env.VITE_BACKEND_URL + "/compile");
-            const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/compile`, { sourceCode, userInput });
+            console.log("port = " + import.meta.env.REACT_APP_API_URL + "/compile");
+            const response = await axios.post(`${import.meta.env.REACT_APP_API_URL}/compile`, { sourceCode, userInput });
 
             if (response.data.stderr) {
                 setOutput(response.data.stderr);
