@@ -14,7 +14,7 @@ const Output = ({ editorRef, language }) => {
         if (!sourceCode) return;
         try {
             setIsLoading(true);
-            const response = await axios.post('http://localhost:5000/compile', { sourceCode, userInput });
+            const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/compile`, { sourceCode, userInput });
 
             if (response.data.stderr) {
                 setOutput(response.data.stderr);
