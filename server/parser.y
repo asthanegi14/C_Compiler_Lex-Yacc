@@ -355,7 +355,7 @@ int main() {
 	printf("\t\t\t\t\t\t\t   PHASE 4: INTERMEDIATE CODE GENERATION \n\n");
 	for(int i=0; i<ic_idx; i++){
 		printf("%s", icg[i]);
-		fprintf(file, "%s", icg[i]);
+		//fprintf(file, "%s", icg[i]);
 	}
 	printf("\n\n");
 	fclose(file);
